@@ -20,14 +20,14 @@ name | lng | lat | addr | intro | type | style | json
 -----|-----|-----|------|-------|------|-------|-------
 浦东交警非机动车管理所 | 121.606804 | 31.218487 | 浦东新区龙东大道1920号 | 不受理 | 5
 
-name: poi的名称，会显示在弹窗标题
-lng: 经度（x坐标）
-lat: 纬度（y坐标）
-addr: 地址，会显示在弹窗正文
-intro: 备注信息，会显示在弹窗正文
-type: 类型
-style: 0-5，分别对应于 static/img文件夹里pin0 - pin5六种图标
-json: 公式列，自动生成
+- name: poi的名称，会显示在弹窗标题
+- lng: 经度（x坐标）
+- lat: 纬度（y坐标）
+- addr: 地址，会显示在弹窗正文
+- intro: 备注信息，会显示在弹窗正文
+- type: 类型
+- style: 0-5，分别对应于 static/img文件夹里pin0 - pin5六种图标
+- json: 公式列，自动生成
 
 经纬度一般需要用高德地图的web service api来获取，也可以通过[高德地图的示例页面](https://lbs.amap.com/console/show/picker)来逐点提取，获得的是火星坐标（GCJ-02）。
 
