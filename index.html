@@ -8,16 +8,51 @@
   <link rel="stylesheet" type="text/css" href="static/css/pagination.css">
   <title>上海电动自行车上牌点(2020-3)</title>
   <style>
-    #keywords {
-      position: absolute;
-      right: 310px;
-      top: 7px;
-      line-height: 200%;
-      padding: 0 5px;
-      font-size: 13;
-      border-radius: 3px;
-      border: 1px solid #ccc;
-      width: 150px;
+    @media screen and (min-width: 641px) {
+      #keywords {
+        position: absolute;
+        right: 310px;
+        top: 7px;
+        line-height: 200%;
+        padding: 0 5px;
+        font-size: 13;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        width: 200px;
+        height: 30px;
+      }
+    }
+    @media screen and (max-width: 640px) {
+      #panel {
+        position: absolute;
+        top: unset;
+        width: 100%;
+        height: 300px;
+        z-index: 999;
+        border-top: 1px solid #eaeaea;
+        background: #fff;
+      }
+      #outer-box {
+        position:relative;  
+        width:100%;
+        min-height:100%; 
+        padding-bottom: 300px;
+        padding-right: unset;
+        box-sizing: border-box;
+      }
+      #keywords {
+        position: absolute;
+        top: 7px;
+        left: unset;
+        right: 20px;
+        line-height: 200%;
+        padding: 0 5px;
+        font-size: 13;
+        border-radius: 3px;
+        border: 1px solid #ccc;
+        width: 60%;
+        height: 30px;
+      }
     }
   </style>
 </head>
@@ -25,8 +60,9 @@
 <body>
   <div id="outer-box">
     <div id="container" tabindex="0"></div>
-    <input type="text" id="keywords" placeholder="输入关键词，如：中山医院" value="" style="width:250px;height:30px" />
+    <input type="text" id="keywords" placeholder="输入关键词，如：中山医院" value="" />
     <div id="panel" class="scrollbar1">
+      <button id="closePanel" style='float:right;margin-right:10px;margin-top:5px'>X</button>
       <ul id="pagination-demo" class="pagination-sm"></ul>
       <ul id="myList">
       </ul>
@@ -69,6 +105,32 @@
       infoWindow.setContent(e.target.content);
       infoWindow.open(map, e.target.getPosition());
     }
+    var closePanel = document.getElementById('closePanel');
+    var panel = document.getElementById('panel');
+    var outerBox = document.getElementById('outer-box');
+    closePanel.onclick = function () {
+      // panel.style.display = 'none';
+      if (document.body.clientWidth <= 640) {
+        panel.style.height = 0;
+        outerBox.style.paddingBottom = 0;
+      } else {
+        panel.style.width = 0;
+        outerBox.style.paddingRight = 0;
+      }
+    }
+    var keywords = document.getElementById('keywords');
+    $("#keywords").bind('keypress', function (evt) {
+      if (evt.keyCode == "13") {
+        // panel.style.display = 'block';
+        if (document.body.clientWidth <= 640) {
+          panel.style.height = "300px";
+          outerBox.style.paddingBottom = "300px";
+        } else {
+          panel.style.width = "300px";
+          outerBox.style.paddingRight = "300px";
+        }
+      }
+    })
 
     // 加载图层
     AMapUI.loadUI(['control/BasicControl'], function(BasicControl) {
